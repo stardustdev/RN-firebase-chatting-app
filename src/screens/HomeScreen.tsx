@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,6 +7,14 @@ import firebase from '@src/utils/firebase';
 
 const HomeScreen: React.FC<{}> = (): JSX.Element => {
   const navigation = useNavigation();
+  const [name, setName] = useState<string>('');
+  const [uid, setUid] = useState<string>('');
+
+  useEffect(() => {
+    const currentUser = firebase.auth().currentUser;
+    setName(currentUser?.displayName || '');
+    setUid(currentUser?.uid || '');
+  }, []);
 
   const handleLogout = () => {
     firebase
@@ -17,7 +25,8 @@ const HomeScreen: React.FC<{}> = (): JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Hello, bro</Text>
+      <Text style={styles.textStyle}>Hello, {name}</Text>
+      <Text style={styles.textStyle}>UserId, {uid}</Text>
       <Button title="Logout" color={colors.darkgrey} onPress={handleLogout} />
     </View>
   );
