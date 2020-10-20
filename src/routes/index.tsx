@@ -5,6 +5,8 @@ import LoginScreen from '@src/screens/LoginScreen';
 import RegisterScreen from '@src/screens/RegisterScreen';
 import HomeScreen from '@src/screens/HomeScreen';
 
+import colors from '@src/utils/colors';
+
 const Stack = createStackNavigator();
 
 const Routes: React.FC<{}> = (): JSX.Element => {
@@ -14,9 +16,9 @@ const Routes: React.FC<{}> = (): JSX.Element => {
       screenOptions={{
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#3740fe',
+          backgroundColor: colors.primary,
         },
-        headerTintColor: '#fff',
+        headerTintColor: colors.white,
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -29,12 +31,20 @@ const Routes: React.FC<{}> = (): JSX.Element => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{ title: 'Login' }}
+        options={{
+          title: 'Login',
+          headerLeft: () => null,
+          headerRight: () => null,
+        }}
       />
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Home' }}
+        options={{
+          title: 'Home',
+          headerLeft: () => null,
+          headerRight: () => null,
+        }}
       />
     </Stack.Navigator>
   );
